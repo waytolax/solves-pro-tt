@@ -1,5 +1,5 @@
 <template>
-  <button class="button-comp" @click="$emit('click')">
+  <button class="button-comp" @click="$emit('click')" v-on="$attrs">
     <slot />
   </button>
 </template>
@@ -23,6 +23,9 @@ export default {}
 
   &:active {
     background-color: #676cc4;
+  }
+  &:disabled {
+    opacity: 0.5;
   }
 
   &.apply {
