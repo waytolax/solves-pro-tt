@@ -4,6 +4,7 @@ const uiPath = path.resolve(__dirname, 'src/components/UI')
 
 export default {
   srcDir: 'src',
+  ssr: false,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'solves-pro-tt',

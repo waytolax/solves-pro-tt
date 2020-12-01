@@ -68,6 +68,10 @@ fieldset {
   margin: 0;
 }
 
+[role='button'] {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
