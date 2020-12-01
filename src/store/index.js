@@ -35,6 +35,11 @@ const actions = {
 
     commit('setBlocks', updatedBlocks)
   },
+  deleteBlock({ state, commit }, block) {
+    const updatedBlocks = state.blocks.filter(b => b.id !== block.id)
+
+    commit('setBlocks', updatedBlocks)
+  },
   saveBlocks({ state }) {
     try {
       const blocks = JSON.stringify(state.blocks)

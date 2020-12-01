@@ -12,6 +12,7 @@
       @close="closeDialog"
       @apply-changes="applyChanges"
       @open-dialog="openDialog($event)"
+      @delete-block="startBlockDelition"
     />
   </main>
 </template>
@@ -53,6 +54,7 @@ export default {
     ...mapActions({
       addBlock: 'addBlock',
       updateBlock: 'updateBlock',
+      deleteBlock: 'deleteBlock',
     }),
     applyChanges({ value, event }) {
       if (event === 'set') this.addBlock({ type: this.currentDialog, value })
@@ -65,6 +67,12 @@ export default {
     editBlock(block) {
       this.editableBlock = block
       this.openDialog(block.type)
+    },
+    startBlockDelition() {
+      const isConfirmed = confirm('Вы уверены что хотите удалить этот блок?')
+      if (isConfirmed) this.deleteBlock(this.editableBlock)
+
+      this.closeDialog()
     },
     openDialog(type) {
       this.currentDialog = type

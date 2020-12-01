@@ -12,6 +12,7 @@
         {{ block ? 'Обновить' : 'Добавить' }}
       </ButtonComp>
       <ButtonComp class="cancel" @click="$emit('close')"> Закрыть </ButtonComp>
+      <DeleteBtn v-if="block" @click="$emit('delete-block')" />
     </div>
   </Dialog>
 </template>
@@ -19,10 +20,15 @@
 <script>
 import Dialog from '@ui/Dialog'
 import ButtonComp from '@ui/ButtonComp'
+import DeleteBtn from '@ui/DeleteBtn'
 
 export default {
   name: 'TextDialog',
-  components: { Dialog, ButtonComp },
+  components: {
+    Dialog,
+    ButtonComp,
+    DeleteBtn,
+  },
   props: {
     block: {
       type: Object,
@@ -67,6 +73,7 @@ export default {
 
   & .wrapper {
     display: flex;
+    align-items: center;
     width: 100%;
     gap: 10px;
 
