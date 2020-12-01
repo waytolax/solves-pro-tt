@@ -1,9 +1,6 @@
 import images from '@/assets/mock/images'
 import { createBlock } from '@/models'
 
-export const getUpdatedArr = (originArr, newValue) =>
-  originArr.map(d => (d.id === newValue.id ? newValue : d))
-
 const state = () => ({
   blocks: [],
   images: [],
