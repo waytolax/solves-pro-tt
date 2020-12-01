@@ -15,9 +15,6 @@ const mutations = {
 }
 
 const actions = {
-  nuxtServerInit({ dispatch }) {
-    dispatch('fetchImages')
-  },
   fetchImages({ commit }) {
     commit('setImages', images)
   },

@@ -9,7 +9,9 @@ import { mapActions } from 'vuex'
 
 export default {
   beforeMount() {
+    this.fetchImages()
     this.fetchBlocks()
+
     window.addEventListener('beforeunload', this.saveBlocks)
   },
   destroyed() {
@@ -19,6 +21,7 @@ export default {
     ...mapActions({
       saveBlocks: 'saveBlocks',
       fetchBlocks: 'fetchBlocks',
+      fetchImages: 'fetchImages',
     }),
   },
 }
