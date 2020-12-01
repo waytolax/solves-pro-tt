@@ -4,6 +4,26 @@
   </div>
 </template>
 
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  beforeMount() {
+    this.fetchBlocks()
+    window.addEventListener('beforeunload', this.saveBlocks)
+  },
+  destroyed() {
+    window.removeEventListener('beforeunload', this.saveBlocks)
+  },
+  methods: {
+    ...mapActions({
+      saveBlocks: 'saveBlocks',
+      fetchBlocks: 'fetchBlocks',
+    }),
+  },
+}
+</script>
+
 <style>
 @import '~@/assets/normalize.css';
 @import '~@/assets/default-styles.css';

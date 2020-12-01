@@ -1,13 +1,13 @@
 <template>
   <Dialog class="image-dialog" @close="$emit('close')">
-    <ImagesList :images="images" @select-image="selectedImage = $event" />
+    <ImagesList :images="images" :selected.sync="selectedImage" />
     <div class="wrapper">
       <ButtonComp
         class="apply"
         :disabled="!selectedImage"
-        @click="$emit('apply', selectedImage.id)"
+        @click="applyChanges"
       >
-        Сохранить
+        {{ block ? 'Обновить' : 'Добавить' }}
       </ButtonComp>
       <ButtonComp class="cancel" @click="$emit('close')"> Закрыть </ButtonComp>
     </div>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import Dialog from '@ui/Dialog'
 import ButtonComp from '@ui/ButtonComp'
 import ImagesList from './ImagesList'
@@ -27,15 +29,30 @@ export default {
     ButtonComp,
   },
   props: {
-    images: {
-      type: Array,
-      default: () => [],
+    block: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
     return {
-      selectedImage: null,
+      selectedImage: '',
     }
+  },
+  computed: {
+    ...mapState({ images: state => state.images }),
+  },
+  mounted() {
+    if (this.block) this.selectedImage = this.block.image_id
+  },
+  methods: {
+    applyChanges() {
+      const data = {
+        value: this.selectedImage,
+        event: this.block ? 'update' : 'set',
+      }
+      this.$emit('apply-changes', data)
+    },
   },
 }
 </script>

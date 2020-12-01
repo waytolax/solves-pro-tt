@@ -4,7 +4,7 @@
       v-for="img of images"
       :key="img.id"
       :class="{ selected: img.id === selected }"
-      @click="selectImage(img)"
+      @click="$emit('update:selected', img.id)"
     >
       <img :src="img.src" :alt="img.description" />
     </li>
@@ -19,16 +19,9 @@ export default {
       type: Array,
       default: () => [],
     },
-  },
-  data() {
-    return {
-      selected: '',
-    }
-  },
-  methods: {
-    selectImage(img) {
-      this.selected = img.id
-      this.$emit('select-image', img)
+    selected: {
+      type: String,
+      default: '',
     },
   },
 }
