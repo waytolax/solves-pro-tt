@@ -32,6 +32,7 @@ export default {}
     align-items: center;
     justify-content: center;
     width: 90%;
+    max-width: 800px;
     padding: 20px 10px;
     border-radius: 5px;
     background: #e0dbdb;

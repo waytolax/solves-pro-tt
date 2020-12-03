@@ -1,5 +1,5 @@
 <template>
-  <main class="index-page">
+  <main class="index-page container">
     <h1>Создайте свой уникальный шаблон из блоков</h1>
     <BlocksList :blocks="blocks" @edit-block="editBlock" />
     <AddBlockBtn @click="openDialog('creation')">
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 import BlocksList from '@/components/BlocksList'
 import AddBlockBtn from '@ui/AddBlockBtn'
@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({ blocks: state => state.blocks }),
+    ...mapGetters({ blocks: 'getBlocksSortedByOrder' }),
     dialog() {
       return {
         creation: 'CreationDialog',
