@@ -1,5 +1,5 @@
 <template>
-  <main class="index-page">
+  <main class="index-page container">
     <h1>Создайте свой уникальный шаблон из блоков</h1>
     <BlocksList :blocks="blocks" @edit-block="editBlock" />
     <AddBlockBtn @click="openDialog('creation')">
