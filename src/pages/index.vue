@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 import BlocksList from '@/components/BlocksList'
 import AddBlockBtn from '@ui/AddBlockBtn'
@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({ blocks: state => state.blocks }),
+    ...mapGetters({ blocks: 'getBlocksSortedByOrder' }),
     dialog() {
       return {
         creation: 'CreationDialog',

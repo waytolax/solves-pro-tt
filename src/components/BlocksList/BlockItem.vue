@@ -1,18 +1,26 @@
 <template>
-  <li :class="['block-item', block.type]" @click="$emit('click')">
+  <li
+    :class="['block-item', block.type]"
+    :data-order="block.order"
+    @click="$emit('click')"
+  >
     <p v-if="!isImage">
       {{ block.text }}
     </p>
 
     <img v-else :src="image.src" :alt="image.description" />
+    <DragBtn @click.native.stop @pointerdown.native="emitPointerEvent" />
   </li>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
+import DragBtn from '@ui/DragBtn'
+
 export default {
   name: 'BlockItem',
+  components: { DragBtn },
   props: {
     block: {
       type: Object,
@@ -31,15 +39,28 @@ export default {
   mounted() {
     this.$el.scrollIntoView({ behavior: 'smooth' })
   },
+  methods: {
+    emitPointerEvent(ev) {
+      this.$emit('pointerdown', ev, this.$el, this.block)
+    },
+  },
 }
 </script>
 
 <style scoped>
 .block-item {
+  position: relative;
   display: flex;
   height: 90px;
   background-color: #eee;
   border-radius: 5px;
+  transition: 0.3s;
+  will-change: transform;
+
+  &.dragging {
+    transform: scale(0.95);
+    z-index: 100;
+  }
 
   &.image {
     & img {
@@ -50,8 +71,16 @@ export default {
     }
   }
 
-  &.text {
-    padding: 10px;
+  &.text p {
+    width: 100%;
+    padding: 10px 15px 10px 10px;
+  }
+
+  & .drag-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
   }
 }
 </style>
