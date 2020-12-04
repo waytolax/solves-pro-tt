@@ -54,7 +54,7 @@ export default {
   height: 90px;
   background-color: #eee;
   border-radius: 5px;
-  transition: 0.3s;
+  transition: 0.1s;
   will-change: transform;
 
   &.dragging {
